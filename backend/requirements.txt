@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+python-multipart
+websockets
+torch
+torchvision
+pillow
+numpy
+tqdm
+requests
