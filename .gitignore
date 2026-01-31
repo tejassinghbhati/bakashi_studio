@@ -32,7 +32,6 @@ backend/models/pre-trained/
 backend/temp_monet.html
 backend/content_images/
 backend/style_images/
-frontend/public/style_previews/
 
 # IDE files
 .vscode/
