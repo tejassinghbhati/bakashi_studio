@@ -87,6 +87,22 @@ function App() {
             onStyleChange={setSelectedStyle}
           />
 
+          {/* Intensity Slider - Visual Fix & Build Fix */}
+          <div className="intensity-control mt-4 mb-2 px-1">
+            <label className="intensity-label mb-2">
+              <span className="text-sm font-medium">Artistic Intensity</span>
+              <span className="intensity-value">{intensity}%</span>
+            </label>
+            <input
+              type="range"
+              min="0"
+              max="100"
+              value={intensity}
+              onChange={(e) => setIntensity(parseInt(e.target.value))}
+              className="intensity-slider"
+            />
+          </div>
+
           {/* Gallery Section - Below Style Selector */}
           <div className="gallery-section">
             <div className="gallery-header">
