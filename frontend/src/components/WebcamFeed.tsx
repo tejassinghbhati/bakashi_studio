@@ -22,6 +22,7 @@ export default function WebcamFeed({ selectedStyle, intensity, onSnapshot }: Web
   const isProcessingRef = useRef(false);
   const styledFrameRef = useRef<HTMLImageElement | null>(null);  // Cache styled frame
   const isLoopingRef = useRef(false);
+  const isMountedRef = useRef(true); // Track component mount status
 
   // Keep refs in sync with props
   useEffect(() => {
@@ -34,10 +35,12 @@ export default function WebcamFeed({ selectedStyle, intensity, onSnapshot }: Web
     intensityRef.current = intensity;
   }, [intensity]);
 
-  // Start webcam on mount
+  // Start webcam on mount and handle cleanup
   useEffect(() => {
+    isMountedRef.current = true;
     startWebcam();
     return () => {
+      isMountedRef.current = false;
       stopWebcam();
       if (wsRef.current) {
         wsRef.current.close();
@@ -150,9 +153,10 @@ export default function WebcamFeed({ selectedStyle, intensity, onSnapshot }: Web
         console.log('WebSocket closed');
         setWsStatus('disconnected');
         isProcessingRef.current = false;
-        // Attempt to reconnect after a delay
+        
+        // Attempt to reconnect after a delay only if still mounted
         setTimeout(() => {
-          if (isStreaming) {
+          if (isMountedRef.current && isStreaming) {
             connectWebSocket();
           }
         }, 2000);
@@ -167,6 +171,9 @@ export default function WebcamFeed({ selectedStyle, intensity, onSnapshot }: Web
 
   const processFrames = useCallback(() => {
     const processFrame = () => {
+      // Stop loop if component unmounted
+      if (!isMountedRef.current) return;
+
       if (!videoRef.current || !canvasRef.current) {
         requestAnimationFrame(processFrame);
         return;
