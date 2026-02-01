@@ -1,4 +1,5 @@
 import { useRef, useEffect, useState, useCallback } from 'react';
+import { getWsUrl } from '../config';
 
 interface WebcamFeedProps {
   selectedStyle: string;
@@ -89,6 +90,7 @@ export default function WebcamFeed({ selectedStyle, intensity, onSnapshot }: Web
       return; // Already connected
     }
 
+    try {
       setWsStatus('connecting');
       const wsUrl = getWsUrl();
       
