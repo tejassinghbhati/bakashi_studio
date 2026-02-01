@@ -35,9 +35,10 @@ export const getApiUrl = (): string => {
   }
   
   // 4. Production Fallback (Safety net)
-  // If we are on Vercel but have no config, we might erroneously try to connect to ourselves.
-  // We return a specific error string or empty to let the UI know config is missing.
-  return ""; 
+  // If no config is present, we try to connect to the same host (assumes backend is served from same origin or proxy)
+  const protocol = window.location.protocol === 'https:' ? 'https:' : 'http:';
+  const host = window.location.hostname;
+  return `${protocol}//${host}:8000`; 
 }
 
 /**
