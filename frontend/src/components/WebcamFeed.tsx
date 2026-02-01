@@ -89,12 +89,13 @@ export default function WebcamFeed({ selectedStyle, intensity, onSnapshot }: Web
       return; // Already connected
     }
 
-    try {
-      console.log('Connecting to WebSocket...');
       setWsStatus('connecting');
-      const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-      const host = window.location.hostname;
-      const wsUrl = import.meta.env.VITE_WS_URL || `${protocol}//${host}:8000/ws/style`;
+      const wsUrl = getWsUrl();
+      
+      if (!wsUrl) {
+        throw new Error("Backend URL not configured. Please set VITE_API_URL or edit config.ts");
+      }
+      
       const ws = new WebSocket(wsUrl);
       
       ws.onopen = () => {
