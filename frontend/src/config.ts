@@ -8,7 +8,7 @@ const isProduction = import.meta.env.PROD;
 // Example: "https://bakashi-backend.onrender.com"
 // (Do NOT include the trailing slash /)
 // ============================================
-const HARDCODED_BACKEND_URL = ""; 
+const HARDCODED_BACKEND_URL: string = "https://bakashi-studio.onrender.com"; 
 
 /**
  * Determines the API URL based on environment or configuration.
@@ -26,16 +26,23 @@ export const getApiUrl = (): string => {
   }
   
   // 3. Fallback: Assumption for Local Development
-  // If we are NOT in production, we assume the backend is running on port 8000
-  // on the same network address as the frontend.
   if (!isProduction) {
      const protocol = window.location.protocol === 'https:' ? 'https:' : 'http:';
      const host = window.location.hostname;
      return `${protocol}//${host}:8000`;
   }
   
-  // 4. Production Fallback (Safety net)
-  // If no config is present, we try to connect to the same host (assumes backend is served from same origin or proxy)
+  // 4. Production Check:
+  // If we are on Vercel, we DEFINITELY need a backend URL.
+  // We should not default to localhost or relative path port 8000.
+  if (window.location.hostname.includes('vercel.app')) {
+    console.error("CRITICAL CONFIG ERROR: Backend URL is missing! Please set VITE_API_URL in Vercel or update default in config.ts");
+    // Return empty string to force error handler to show configuration error instead of network error
+    return "";
+  }
+  
+  // 5. Generic Production Fallback
+  // If hosted elsewhere, maybe the backend IS on the same host (e.g. Docker container)
   const protocol = window.location.protocol === 'https:' ? 'https:' : 'http:';
   const host = window.location.hostname;
   return `${protocol}//${host}:8000`; 
