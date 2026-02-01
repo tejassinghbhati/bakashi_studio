@@ -101,7 +101,7 @@ To make the app work on the public internet (Vercel + Render), you must link the
 
 ### 1. Backend (Render)
 Deploy the `backend` folder to Render as a **Web Service**.
-- **Build Command:** `bash render_build.sh`
+- **Build Command:** `sh render_build.sh`
 - **Start Command:** `uvicorn main:app --host 0.0.0.0 --port $PORT`
 
 ### 2. Frontend (Vercel)
