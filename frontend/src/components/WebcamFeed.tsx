@@ -62,8 +62,20 @@ export default function WebcamFeed({ selectedStyle, intensity, onSnapshot }: Web
 
   const startWebcam = async () => {
     try {
+      // Check for secure context (required for camera access on non-localhost)
+      if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+        throw new Error(
+          "Camera access is blocked. Browsers require HTTPS for camera access on mobile/network devices. Please test on 'localhost' or deploy to Vercel (HTTPS)."
+        );
+      }
+
       const stream = await navigator.mediaDevices.getUserMedia({
-        video: { width: 640, height: 480 }
+        // Use 'ideal' constraints to prevent failure on devices that don't match exact resolution
+        video: { 
+          width: { ideal: 640 }, 
+          height: { ideal: 480 },
+          facingMode: "user" 
+        }
       });
       
       if (videoRef.current) {
@@ -72,9 +84,10 @@ export default function WebcamFeed({ selectedStyle, intensity, onSnapshot }: Web
         setIsStreaming(true);
         setError(null);
       }
-    } catch (err) {
-      setError('Failed to access webcam. Please grant camera permissions.');
+    } catch (err: any) {
       console.error('Webcam error:', err);
+      // Show the specific error message if it's our custom one, otherwise generic
+      setError(err.message || 'Failed to access webcam. Please ensure you are using HTTPS or Localhost.');
     }
   };
 
