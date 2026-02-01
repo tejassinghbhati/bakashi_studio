@@ -49,7 +49,9 @@ export default function ImageUpload() {
 
     setIsProcessing(true);
     try {
-      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+      const protocol = window.location.protocol === 'https:' ? 'https:' : 'http:';
+      const host = window.location.hostname;
+      const apiUrl = import.meta.env.VITE_API_URL || `${protocol}//${host}:8000`;
       const response = await fetch(`${apiUrl}/process-image`, {
         method: 'POST',
         headers: {

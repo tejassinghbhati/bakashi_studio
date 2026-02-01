@@ -92,7 +92,9 @@ export default function WebcamFeed({ selectedStyle, intensity, onSnapshot }: Web
     try {
       console.log('Connecting to WebSocket...');
       setWsStatus('connecting');
-      const wsUrl = import.meta.env.VITE_WS_URL || 'ws://127.0.0.1:8000/ws/style';
+      const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+      const host = window.location.hostname;
+      const wsUrl = import.meta.env.VITE_WS_URL || `${protocol}//${host}:8000/ws/style`;
       const ws = new WebSocket(wsUrl);
       
       ws.onopen = () => {

@@ -62,10 +62,17 @@ body {
   background-size: 250px 250px;
   background-color: #2c3e50;
   padding: 3rem 2rem;
-  height: calc(100vh - 55px);
+  /* height: calc(100vh - 55px); Remove fixed height */
+  min-height: 50vh; /* Ensure some height on mobile */
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+@media (min-width: 1024px) {
+  .preview-panel {
+    height: calc(100vh - 55px);
+  }
 }
 
 .preview-canvas-wrapper {
@@ -107,10 +114,18 @@ body {
   background-size: 200px 200px;
   background-color: var(--color-ornate-bg);
   padding: 1.5rem;
-  height: calc(100vh - 55px);
+  /* height: calc(100vh - 55px); Remove fixed height */
+  min-height: 50vh;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  /* overflow: hidden; Allow scroll on mobile */
+}
+
+@media (min-width: 1024px) {
+  .style-panel {
+    height: calc(100vh - 55px);
+    overflow: hidden;
+  }
 }
 
 /* Aesthetic Golden Scrollbar */
