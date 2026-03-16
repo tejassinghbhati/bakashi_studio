@@ -1,4 +1,4 @@
-# 🎨 Bakashi Studio — Neural Style Transfer
+# Bakashi Studio — Neural Style Transfer
 
 <p align="center">
   <img src="https://img.shields.io/badge/Maintained-yes-green.svg" />
@@ -10,7 +10,7 @@
 
 ---
 
-## ✨ Overview
+## Overview
 
 **Bakashi Studio** is a high-performance web application for artistic exploration.  
 It uses **Deep Learning** and **Neural Style Transfer** to transform real-time webcam feeds and uploaded images into works of art inspired by masters like Van Gogh, Monet, and Picasso.
@@ -19,18 +19,18 @@ The interface follows a **classical museum aesthetic**, blending modern AI with 
 
 ---
 
-## 🚀 Key Features
+## Key Features
 
-- 🎭 **Real-time Artistic Vision** — Apply 10+ styles to live webcam feed with low latency  
-- 🖼️ **Image Laboratory** — Upload photos and reimagine them artistically  
-- 🎚️ **Precision Controls** — Adjustable artistic intensity  
-- 🏛️ **Personal Museum** — Capture, preview, and download creations  
-- ⚜️ **Premium UI** — Ornate design with gold accents and Libre Caslon Text  
-- ⚡ **High Performance** — FastAPI + PyTorch optimized pipeline  
+- **Real-time Artistic Vision** — Apply 10+ styles to live webcam feed with low latency  
+- **Image Laboratory** — Upload photos and reimagine them artistically  
+- **Precision Controls** — Adjustable artistic intensity  
+- **Personal Museum** — Capture, preview, and download creations  
+- **Premium UI** — Ornate design with gold accents and Libre Caslon Text  
+- **High Performance** — FastAPI + PyTorch optimized pipeline  
 
 ---
 
-## 🎨 Artistic Styles
+## Artistic Styles
 
 | Style | Inspiration |
 |------|------------|
@@ -43,7 +43,7 @@ The interface follows a **classical museum aesthetic**, blending modern AI with 
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 ### Frontend
 - React 18 (TypeScript)
@@ -59,7 +59,7 @@ The interface follows a **classical museum aesthetic**, blending modern AI with 
 
 ---
 
-## 📦 Installation & Setup
+## Installation & Setup
 
 ### Prerequisites
 - Python 3.10+
@@ -95,7 +95,7 @@ npm run dev
 
 ---
 
-## 🌐 Deployment Configuration
+## Deployment Configuration
 
 To make the app work on the public internet (Vercel + Render), you must link them.
 
